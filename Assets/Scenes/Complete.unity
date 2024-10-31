@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 140142732}
   - component: {fileID: 140142739}
   - component: {fileID: 140142738}
+  - component: {fileID: 140142740}
   m_Layer: 0
   m_Name: LipSync+ AWS + CHATGPT
   m_TagString: Untagged
@@ -331,6 +332,27 @@ MonoBehaviour:
   laughterThreshold: 0.5
   laughterMultiplier: 1.5
   smoothAmount: 70
+--- !u!95 &140142740
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140142731}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 7e0f5f1c620567d44aacbfe585dec058, type: 3}
+  m_Controller: {fileID: 9100000, guid: b2b96b3c9b942104f9fe248021c665ec, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &178011231
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +431,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter The Number
+  m_text: Enter Interaction
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

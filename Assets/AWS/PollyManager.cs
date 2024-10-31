@@ -16,7 +16,7 @@ public class PollyManager : MonoBehaviour
         try
         {
             
-            var awsCredentials = new BasicAWSCredentials("AKIAQUFLQQTGLOEMX25V", "dgRSB1ghLl+Gme8DnrLm7LLVO4Xk8N0HR1iBfVab");
+            var awsCredentials = new BasicAWSCredentials("", "");
             pollyClient = new AmazonPollyClient(awsCredentials, Amazon.RegionEndpoint.USEast1); 
 
             lipSyncContext = GetComponent<OVRLipSyncContext>();
@@ -39,11 +39,8 @@ public class PollyManager : MonoBehaviour
                 Debug.LogError("Text too long for Polly request (must be 3000 characters or fewer).");
                 return;
             }
-
-            
             string ssmlText = "<speak><prosody rate=\"slow\">" + customText + "</prosody></speak>";
 
-            
             SynthesizeSpeechRequest synthReq = new SynthesizeSpeechRequest()
             {
                 Text = ssmlText, 
@@ -51,10 +48,7 @@ public class PollyManager : MonoBehaviour
                 OutputFormat = OutputFormat.Pcm,  
                 TextType = TextType.Ssml 
             };
-
-           
             SynthesizeSpeechResponse synthRes = pollyClient.SynthesizeSpeech(synthReq);
-
             
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -77,7 +71,6 @@ public class PollyManager : MonoBehaviour
     {
         int sampleRate = 22050;  
         int channels = 1;  
-
        
         float[] floatArray = new float[audioData.Length / 2]; 
         for (int i = 0; i < floatArray.Length; i++)
@@ -85,23 +78,16 @@ public class PollyManager : MonoBehaviour
             short sample = BitConverter.ToInt16(audioData, i * 2);  
             floatArray[i] = sample / 32768.0f;  
         }
-
        
         AudioClip clip = AudioClip.Create("PollyAudioClip", floatArray.Length, channels, sampleRate, false);
         clip.SetData(floatArray, 0);
-
-        
         audioSource.clip = clip;
         audioSource.Play();
-
-      
         lipSyncContext.ResetContext(); 
     }
 
- 
     private void TriggerPollySpeech()
     {
-       
         string customText = "You got this!";
         SynthesizeTextToSpeech(customText);
     }

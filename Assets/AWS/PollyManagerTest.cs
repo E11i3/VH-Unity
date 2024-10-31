@@ -17,13 +17,10 @@ public class PollyManagerTest : MonoBehaviour
         try
         {
            
-           var awsCredentials = new BasicAWSCredentials("AKIAQUFLQQTGLOEMX25V", "dgRSB1ghLl+Gme8DnrLm7LLVO4Xk8N0HR1iBfVab");
-
-
+           var awsCredentials = new BasicAWSCredentials("", "");
             pollyClient = new AmazonPollyClient(awsCredentials, Amazon.RegionEndpoint.USEast1);
-
         
-            TriggerPollySpeech("You can now begin. Goodluck!");
+            TriggerPollySpeech("Would you like some general advice or type 1 to stretch?");
         }
         catch (Exception e)
         {
@@ -40,11 +37,9 @@ public class PollyManagerTest : MonoBehaviour
                 Debug.LogError("Text too long for Polly request (must be 3000 characters or fewer).");
                 return;
             }
-
             
             string ssmlText = "<speak><prosody rate=\"slow\">" + customText + "</prosody></speak>";
 
-            
             SynthesizeSpeechRequest synthReq = new SynthesizeSpeechRequest()
             {
                 Text = ssmlText, 
@@ -53,10 +48,8 @@ public class PollyManagerTest : MonoBehaviour
                 TextType = TextType.Ssml 
             };
 
-           
             SynthesizeSpeechResponse synthRes = pollyClient.SynthesizeSpeechAsync(synthReq).Result;
 
-            
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 synthRes.AudioStream.CopyTo(memoryStream);
@@ -107,7 +100,6 @@ public class PollyManagerTest : MonoBehaviour
     {
         if (chatHandlerTest != null)
         {
-            
             string customText = chatHandlerTest.GetLatestChatResponse();
             SynthesizeTextToSpeech(customText);
         }

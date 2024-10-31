@@ -33,15 +33,21 @@ public class AnimationSwitch : MonoBehaviour
 
     private IEnumerator TriggerAnimation(int index, float delay)
     {
+          if (index != 1 && index != 2)
+    {
+        Debug.LogError("Invalid index. Only 1 (Stretching) or 2 (Meditate) are allowed.");
+        yield break; 
+    }
+
         yield return new WaitForSeconds(delay);
-        
+
         switch (index)
         {
             case 1:
                 animator.SetTrigger("Stretching");
                 break;
             case 2:
-                animator.SetTrigger("Joke");
+                animator.SetTrigger("Meditation");
                 break;
         }
     }
